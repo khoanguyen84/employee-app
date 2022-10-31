@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
+import EmployeeList from './components/EmployeeList/EmployeeList';
+import Navbar from './components/Navbar/Navbar';
+import CreateEmployee from './components/CreateEmployee/CreateEmployee';
+import ViewEmployee from './components/ViewEmployee/ViewEmployee';
+import EditEmployee from './components/EditEmployee/EditEmployee';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ToastContainer />
+      <Navbar />
+      <Routes>
+        <Route path='/employee' element={<EmployeeList />}></Route>
+        <Route path='/employee/create' element={<CreateEmployee />}></Route>
+        <Route path='/employee/view/:employeeId' element={<ViewEmployee />}></Route>
+        <Route path='/employee/edit/:employeeId' element={<EditEmployee />}></Route>
+      </Routes>
+    </>
   );
 }
 
