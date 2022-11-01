@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Spinner from "../Spinner/Spinner";
 import EmployeeService from './../../services/employeeService';
@@ -69,10 +70,10 @@ const EmployeeList = () => {
                 <div className="container">
                     <div className="d-flex align-items-center">
                         <h3>Employee Manager</h3>
-                        <button className="btn btn-primary btn-sm ms-2">
+                        <Link to={"/employee/create"} className="btn btn-primary btn-sm ms-2">
                             <i className="fa fa-circle-plus me-2"></i>
                             New
-                        </button>
+                        </Link>
                     </div>
                     <p className="fst-italic">Pariatur veniam id sunt fugiat duis dolor consectetur ea qui. Culpa culpa sint ipsum incididunt. Lorem cupidatat minim in nisi qui eiusmod duis proident do. Pariatur esse mollit nisi amet non Lorem commodo. Sit fugiat ex voluptate incididunt pariatur voluptate. Ipsum do est enim fugiat non.</p>
                     <form onSubmit={handleSearch}>
