@@ -6,7 +6,7 @@ function Navbar() {
         <div className="w-100">
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container">
-                    <Link className="navbar-brand" to={"/employee"}>
+                    <Link className="navbar-brand" to={"/employee-app"}>
                         <h5>
                             <i className="fa fa-mobile text-warning me-2"></i>
                             Employee

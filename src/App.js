@@ -14,10 +14,10 @@ function App() {
       <ToastContainer />
       <Navbar />
       <Routes>
-        <Route path='/employee' element={<EmployeeList />}></Route>
-        <Route path='/employee/create' element={<CreateEmployee />}></Route>
-        <Route path='/employee/view/:employeeId' element={<ViewEmployee />}></Route>
-        <Route path='/employee/edit/:employeeId' element={<EditEmployee />}></Route>
+        <Route path='/employee-app' element={<EmployeeList />}></Route>
+        <Route path='/employee-app/create' element={<CreateEmployee />}></Route>
+        <Route path='/employee-app/view/:employeeId' element={<ViewEmployee />}></Route>
+        <Route path='/employee-app/edit/:employeeId' element={<EditEmployee />}></Route>
       </Routes>
     </>
   );
