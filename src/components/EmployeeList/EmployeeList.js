@@ -70,7 +70,7 @@ const EmployeeList = () => {
                 <div className="container">
                     <div className="d-flex align-items-center">
                         <h3>Employee Manager</h3>
-                        <Link to={"/employee/create"} className="btn btn-primary btn-sm ms-2">
+                        <Link to={"/employee-app/create"} className="btn btn-primary btn-sm ms-2">
                             <i className="fa fa-circle-plus me-2"></i>
                             New
                         </Link>
@@ -92,7 +92,7 @@ const EmployeeList = () => {
                         loading ? <Spinner /> : (
                             <div className="row">
                                 {employees.map(emp => (
-                                    <div className="col-6 mb-4">
+                                    <div className="col-6 mb-4" key={emp.id}>
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="row align-items-center">
@@ -114,12 +114,12 @@ const EmployeeList = () => {
                                                     </div>
                                                     <div className="col-1">
                                                         <div className="d-flex flex-column align-items-center justify-content-between">
-                                                            <button className="btn btn-warning btn-sm">
+                                                            <Link to={`/employee-app/view/${emp.id}`} className="btn btn-warning btn-sm">
                                                                 <i className=" fa fa-eye"></i>
-                                                            </button>
-                                                            <button className="btn btn-primary btn-sm my-2">
+                                                            </Link>
+                                                            <Link to={`/employee-app/edit/${emp.id}`} className="btn btn-primary btn-sm my-2">
                                                                 <i className=" fa fa-edit"></i>
-                                                            </button>
+                                                            </Link>
                                                             <button className="btn btn-danger btn-sm" onClick={() => handleRemoveEmployee(emp)}>
                                                                 <i className=" fa fa-trash"></i>
                                                             </button>

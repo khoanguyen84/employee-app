@@ -5,7 +5,10 @@ import EmployeeService from './../../services/employeeService';
 import { toast } from 'react-toastify';
 import DepartmentService from "../../services/departmentService";
 import FileService from './../../services/fileService';
+import Helper from './../../helper/Helper';
 
+
+var draftAvatar = "";
 const CreateEmployee = () => {
     const [state, setState] = useState({
         loading: false,
@@ -19,12 +22,22 @@ const CreateEmployee = () => {
     useEffect(() => {
         try {
             async function getDepart() {
-                let departRes = await DepartmentService.getDepartment();
+                let departRes = await DepartmentService.getDepartments();
                 setDepartments(departRes.data);
             }
             getDepart();
         } catch (error) {
 
+        }
+        // cleanup function
+        return async () => {
+            if(draftAvatar){
+                let filename = Helper.getFilename(draftAvatar);
+                if(filename){
+                    await FileService.destroyImage(filename);
+                    draftAvatar = "";
+                }   
+            }
         }
     }, [])
     const handleChangeAvatar = (e) => {
@@ -82,9 +95,13 @@ const CreateEmployee = () => {
         let uploadRes = await FileService.uploadImage(fileImage);
         setUpload(false);
         employee.avatar = uploadRes.data.url;
+        draftAvatar = employee.avatar;
+        toast.success(`Avatar has been changed success!`, { autoClose: 1000});
+        
     }
     const { loading, employee } = state;
     const { name, avatar, mobile, salary, title, email, departId } = employee;
+    console.log(avatar);
     return (
         <>
             <section className="create-info my-2">
@@ -100,19 +117,19 @@ const CreateEmployee = () => {
                         <div className="col-4">
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-1">
-                                    <input value={name} className="form-control form-control-sm" type="text" name="name" placeholder="Name" onChange={handleInput} />
+                                    <input value={name} className="form-control form-control-sm" type="text" required name="name" placeholder="Name" onChange={handleInput} />
                                 </div>
                                 <div className="mb-1">
-                                    <input value={mobile} className="form-control form-control-sm" type="tel" name="mobile" placeholder="Mobile" onChange={handleInput} />
+                                    <input value={mobile} className="form-control form-control-sm" type="tel" required name="mobile" placeholder="Mobile" onChange={handleInput} />
                                 </div>
                                 <div className="mb-1">
-                                    <input value={email} className="form-control form-control-sm" type="email" name="email" placeholder="Email" onChange={handleInput} />
+                                    <input value={email} className="form-control form-control-sm" type="email" required name="email" placeholder="Email" onChange={handleInput} />
                                 </div>
                                 <div className="mb-1">
-                                    <input value={title} className="form-control form-control-sm" type="text" name="title" placeholder="Title" onChange={handleInput} />
+                                    <input value={title} className="form-control form-control-sm" type="text" required name="title" placeholder="Title" onChange={handleInput} />
                                 </div>
                                 <div className="mb-1">
-                                    <input value={salary} className="form-control form-control-sm" type="number" name="salary" placeholder="Salary" onChange={handleInput} />
+                                    <input value={salary} className="form-control form-control-sm" type="number" required name="salary" placeholder="Salary" onChange={handleInput} />
                                 </div>
                                 <div className="mb-1">
                                     <select name="departId" value={departId} className="form-control form-control-sm" onChange={handleInput} defaultValue="0">

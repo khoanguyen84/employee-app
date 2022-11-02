@@ -4,12 +4,20 @@ class EmployeeService {
     static getEmployees() {
         return axios.get(EMPLOYEE_API_URL);
     }
-    static removeEmployee(employeId) {
-        return axios.delete(`${EMPLOYEE_API_URL}/${employeId}`);
+
+    static getEmployee(employeeId) {
+        return axios.get(`${EMPLOYEE_API_URL}/${employeeId}`);
+    }
+
+    static removeEmployee(employeeId) {
+        return axios.delete(`${EMPLOYEE_API_URL}/${employeeId}`);
     }
     
     static createEmployee(employee){
         return axios.post(EMPLOYEE_API_URL, employee);
+    }
+    static editEmployee(employee, employeeId){
+        return axios.put(`${EMPLOYEE_API_URL}/${employeeId}`, employee);
     }
 }   
 
